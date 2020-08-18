@@ -3,6 +3,7 @@
 
 
 library(qcc)
+library(car)
 
 
 # process data
@@ -22,7 +23,7 @@ USL = max(df)
 
 
 ## I Chart
-par(cex.axis=0.8)
+par(cex.axis=0.7)
 q <- qcc(df, type="xbar.one", limits = c(LCL, UCL), restore.par=FALSE, title = 'I Chart', ylab = 'Individual Value', xlab = '')
 axis(1, at=c(1:length(df)), labels = labels, las=3)
 
@@ -47,10 +48,17 @@ axis(1, at=c(1:length(df)), labels = labels, las=3)
 
 
 ## QQ Plot
-qqnorm(df)
+#par(bg = 'white')
+qqPlot(df, ylab = '', col.lines='black', main='Normal Prob Plot')
 
 
 ## Last 15 Observations
 qcc(df, type="xbar.one", restore.par=FALSE, title = 'Last 15 Observations', ylab = 'Individual Value', xlab = '')
 axis(1, at=c(1:length(df)), labels = labels, las=3)
+
+
+plot.new()
+abline(h=0)
+abline(h=0.5)
+abline(h=1)
 
